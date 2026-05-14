@@ -1,6 +1,35 @@
+import radarMacro from "../assets/radar-macro.png";
+import darkQuantAcademyCover from "../assets/darkquant-academy-cover.png";
+
 const projects = [
   {
+    n: "01",
+    title: "Radar Macro IA",
+    kind: "IA aplicada · Trading Lab",
+    desc: "Laboratório de IA em produção e evolução contínua para análise macro, sinais simulados, replay de mercado, gestão de risco e alavancagem controlada.",
+    problem: "Criar um ambiente seguro para estudar decisões de mercado sem enviar ordens reais ou expor capital.",
+    solution: "Dashboard em React que cruza notícias, candles, score de confiança, checklist operacional, risco por trade e modo de simulação.",
+    result: "Projeto autoral em produção ativa, com IA aplicada a decisão, automação, dados financeiros e produto visual com foco em validação antes de execução real.",
+    tags: ["React", "IA", "Fintech"],
+    accent: "bg-ink/10",
+    href: "",
+    preview: "radar",
+  },
+  {
     n: "02",
+    title: "DarkQuant Academy",
+    kind: "IA aplicada - Mentor de estudos",
+    desc: "App pessoal de estudos com IA que cria trilhas, ensina por etapas, gera checkpoints, corrige respostas e acompanha progresso.",
+    problem: "Estudar tecnologia sem uma trilha clara costuma virar excesso de conteudo, pouca pratica e dificuldade para saber o que revisar.",
+    solution: "Interface em React com roadmap por area, tutor conectado ao Gemini, geracao de aulas, checkpoints, exercicios em conversa e estado persistido no navegador.",
+    result: "Projeto em producao para transformar IA em produto educacional: diagnostico, trilhas, professor interativo, avaliacao por rubrica e progresso guiado.",
+    tags: ["React", "Gemini", "EdTech"],
+    accent: "bg-sage/15",
+    href: "",
+    preview: "academy",
+  },
+  {
+    n: "03",
     title: "Douglas Ferreira",
     kind: "Site profissional · Psicólogo",
     desc: "Identidade digital serena e clara para um profissional clínico — copy, design e desenvolvimento.",
@@ -13,7 +42,7 @@ const projects = [
     preview: "douglas",
   },
   {
-    n: "03",
+    n: "04",
     title: "Trading Simulator",
     kind: "Bot de simulação & estratégia",
     desc: "Sistema de simulação e backtesting de estratégias de trade, com indicadores e relatórios automáticos.",
@@ -160,6 +189,48 @@ function TurboBotPreview() {
   );
 }
 
+function RadarMacroPreview() {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[#081120]">
+      <img
+        src={radarMacro}
+        alt="Radar Macro IA"
+        className="h-full w-full object-cover object-top opacity-95"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#081120]/50 via-transparent to-transparent" />
+      <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
+        <span className="rounded-full border border-emerald-400/50 bg-emerald-400/20 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-100">
+          Em producao
+        </span>
+        <span className="rounded-full border border-amber-300/45 bg-amber-300/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-100">
+          Paper trading
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function DarkQuantPreview() {
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[#f6f7ff]">
+      <img
+        src={darkQuantAcademyCover}
+        alt="Tela da DarkQuant Academy"
+        className="h-full w-full object-cover object-top opacity-95"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#070a0f]/35 via-transparent to-transparent" />
+      <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
+        <span className="rounded-full border border-emerald-400/50 bg-emerald-400/20 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-emerald-50">
+          Em producao
+        </span>
+        <span className="rounded-full border border-violet-300/50 bg-violet-400/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-violet-50">
+          Tutor IA
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function Projects() {
   return (
     <section id="projects" className="mx-auto max-w-7xl px-6 lg:px-10 py-28 lg:py-40">
@@ -174,18 +245,28 @@ export function Projects() {
 
       <div className="mt-16 grid md:grid-cols-2 gap-6">
         {projects.map((p, index) => {
-          const Card = p.href ? "a" : "article";
+          const isRadar = p.preview === "radar";
+          const isAcademy = p.preview === "academy";
+          const Card = p.href ? "a" : isRadar || isAcademy ? "button" : "article";
 
           return (
             <Card
               key={p.title}
-              className={`scroll-reveal stagger-${index + 1} lift-card group relative rounded-3xl border border-border bg-card overflow-hidden hover:border-terracotta`}
+              className={`scroll-reveal stagger-${index + 1} lift-card group relative rounded-3xl border border-border bg-card overflow-hidden text-left hover:border-terracotta`}
               {...(p.href
                 ? { href: p.href, target: "_blank", rel: "noreferrer" }
+                : isRadar
+                  ? { type: "button", onClick: () => document.getElementById("radar-macro-case")?.scrollIntoView({ behavior: "smooth", block: "start" }) }
+                : isAcademy
+                  ? { type: "button", onClick: () => document.getElementById("darkquant-academy-case")?.scrollIntoView({ behavior: "smooth", block: "start" }) }
                 : {})}
             >
               <div className={`aspect-[16/10] ${p.accent} relative grain`}>
-                {p.preview === "douglas" ? (
+                {p.preview === "radar" ? (
+                  <RadarMacroPreview />
+                ) : p.preview === "academy" ? (
+                  <DarkQuantPreview />
+                ) : p.preview === "douglas" ? (
                   <DouglasPreview />
                 ) : p.preview === "turbobot" ? (
                   <TurboBotPreview />
@@ -203,8 +284,15 @@ export function Projects() {
 
               <div className="p-7">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-3xl tracking-tight">{p.title}</h3>
-                  {p.href ? (
+                  <div>
+                    {isRadar || isAcademy ? (
+                      <span className="mb-3 inline-flex rounded-full border border-emerald-700/25 bg-emerald-700/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-emerald-700">
+                        Em producao
+                      </span>
+                    ) : null}
+                    <h3 className="font-display text-3xl tracking-tight">{p.title}</h3>
+                  </div>
+                  {p.href && p.preview !== "radar" ? (
                     <span className="text-terracotta transition-transform group-hover:translate-x-1" aria-hidden>→</span>
                   ) : null}
                 </div>
@@ -234,6 +322,104 @@ export function Projects() {
             </Card>
           );
         })}
+      </div>
+
+      <div id="radar-macro-case" className="scroll-reveal mt-24 rounded-3xl border border-border bg-card overflow-hidden">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-0">
+          <div className="flex items-center bg-[#081120] p-4 lg:p-6">
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b1424] shadow-2xl">
+              <img
+                src={radarMacro}
+                alt="Tela do Radar Macro IA"
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
+          </div>
+
+          <div className="p-7 lg:p-10">
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-terracotta">
+              Case em IA aplicada
+            </div>
+            <h3 className="mt-3 font-display text-4xl tracking-tight">
+              Radar Macro IA
+            </h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              Laboratório de análise de mercado em produção ativa e modo simulação. O sistema cruza notícias macro,
+              candles, replay de mercado, score de confiança, gestão de risco e alavancagem controlada
+              antes de liberar uma operação.
+            </p>
+
+            <div className="mt-8 grid gap-3">
+              {[
+                "Robô de notícias macro com classificação por ativo e impacto",
+                "Mesa de sinais com checklist, risco por trade e alavancagem controlada",
+                "Replay candle a candle para validar cenários antes de operar",
+                "Travas contra overtrade, perda diária e mercado lateral",
+                "Em produção ativa, com paper trading: nenhuma ordem real é enviada",
+              ].map((item) => (
+                <div key={item} className="flex gap-3 text-sm text-muted-foreground">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-terracotta shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["React", "TypeScript", "IA", "Trading Lab", "Risk Management"].map((tag) => (
+                <span key={tag} className="chip font-mono text-xs px-3 py-1.5 rounded-full border border-border bg-background">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="darkquant-academy-case" className="scroll-reveal mt-8 rounded-3xl border border-border bg-card overflow-hidden">
+        <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-0">
+          <div className="p-7 lg:p-10">
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-terracotta">
+              Case em IA aplicada
+            </div>
+            <h3 className="mt-3 font-display text-4xl tracking-tight">
+              DarkQuant Academy
+            </h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              Mentor pessoal de tecnologia com IA para estudar com trilhas profundas, aulas em blocos curtos,
+              exercicios guiados e correcao por rubrica. O app usa Gemini quando a chave esta conectada e
+              mantem fallback local para continuar funcionando sem API.
+            </p>
+
+            <div className="mt-8 grid gap-3">
+              {[
+                "Diagnostico de objetivo, tempo disponivel e estilo de estudo",
+                "Roadmaps por area: dados, frontend, backend, IA, DevOps e seguranca",
+                "Geracao de aulas teoricas, exemplos, termos-chave e perguntas de revisao",
+                "Checkpoint com IA para validar entendimento antes de avancar",
+                "Exercicios em conversa, correcao final, rubrica e historico de progresso",
+              ].map((item) => (
+                <div key={item} className="flex gap-3 text-sm text-muted-foreground">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-terracotta shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["React", "TypeScript", "Gemini API", "LocalStorage", "EdTech"].map((tag) => (
+                <span key={tag} className="chip font-mono text-xs px-3 py-1.5 rounded-full border border-border bg-background">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center bg-[#070a0f] p-4 lg:p-6">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#090d14] shadow-2xl">
+              <DarkQuantPreview />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

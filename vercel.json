@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npx vite build --config vite.static.config.ts",
+  "outputDirectory": "dist/client",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
