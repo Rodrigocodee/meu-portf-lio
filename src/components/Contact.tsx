@@ -1,7 +1,7 @@
 const links = [
   { label: "Email", value: "rf30065@gmail.com", href: "mailto:rf30065@gmail.com" },
   { label: "WhatsApp", value: "+55 21 97676-1474", href: "https://wa.me/5521976761474" },
-  { label: "GitHub", value: "www.linkedin.com/in/rodrigocode", href: "https://www.linkedin.com/in/rodrigocode" },
+  { label: "GitHub", value: "github.com/Rodrigocodee", href: "https://github.com/Rodrigocodee" },
   { label: "LinkedIn", value: "www.linkedin.com/in/rodrigocode", href: "https://www.linkedin.com/in/rodrigocode" },
 ];
 

@@ -66,7 +66,7 @@ export function Hero() {
                 Baixar currículo <span aria-hidden>↓</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/rodrigocode"
+                href="https://github.com/Rodrigocodee"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="button-lift inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm hover:bg-accent"
